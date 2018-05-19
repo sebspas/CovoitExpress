@@ -1,0 +1,53 @@
+{% extends 'template.twig' %}
+
+{% block content %}
+<main>
+<h1 id="home-title" class="center">What's in for you today !</h1>
+  <div class="container">
+    <div class="container-movie">
+      <div class="grid" data-masonry='{ "itemSelector": ".grid-item"}'>
+        {% for movie in movies %}
+          <div class="grid-item">
+            <div class="card card-movie">
+              <a href="index.php?page=movie&id={{ movie.name }}">
+                <div class="card-image">
+                {% if movie.image is defined and movie.image != "N/A" %}
+                    <img class="movie-image" src="{{ movie.image }}">
+                {% else %}
+                    <img class="movie-image" src="webroot/images/no-image.jpg">
+                {% endif %}
+                </div>
+              </a>
+              <div class="card-content">
+                  <span class="card-title activator grey-text text-darken-4">{{ movie.name }}</span>
+                  <p><a href="index.php?page=movie&id={{ movie.name }}">See More</a></p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>  
+    </div>
+  </div>
+</main>
+
+<footer class="page-footer modal-trigger" href="#unlike">
+  <div class="container">
+    <div class="row">
+      <div class="center dark-grey col s12 bottom-line">
+        <p><a class="modal-trigger" href="#unlike">Change these suggestions?</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  <!-- Modal Structure -->
+  <div id="unlike" class="modal bottom-sheet">
+    <div class="modal-content collection">
+      {% for tag in tags %}
+      <a href="#!" class="collection-item modal-action modal-close">Show less {{tag.name}}.</a>
+      {% endfor %}
+      <a href="#!" class="collection-item modal-action modal-close">I just want other suggestions.</a>
+    </div>
+  </div>
+
+{% endblock %}

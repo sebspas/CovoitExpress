@@ -1,0 +1,131 @@
+/*****
+    GENERAL
+*****/
+.fixed {
+    position: fixed;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.fixed-top {
+    position: fixed;
+    top: 0;
+}
+
+.fixed-bottom {
+    position: fixed;
+    bottom: 0;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.block {
+    display: block;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+.center {
+    margin: 0 auto;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.style-background {
+    background-color: #282828;
+}
+
+.style-blue {
+    color: #45B3BF;
+}
+
+.style-fushia {
+    color: #D92579;
+}
+
+body {
+    background-color: #282828;
+    background-image: url("../images/bg_login.jpg");
+    font-family: 'PT Serif';
+    color: white;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.btn {
+    background-color: #74b9ff;
+}
+
+.btn:hover {
+    background-color: #0984e3;
+}
+
+/*****
+    SPAN (for profile)
+*****/
+span.badge.new {
+    color: #000;
+    background-color: #D92579;
+    border-radius: 10px;
+}
+
+/*****
+    LOGO
+*****/
+#logo-text {
+    margin-left: 10px;
+    background-image: url("../images/logo.png"), none;
+    background-size: cover;
+    width: 75px;
+    height: 75px;
+}
+
+@media only screen and (max-width: 992px) {
+    #logo-text {
+        margin-top: 10px;
+        margin-left: 50px;
+        width: 80px;
+        height: 35px;
+    }
+}
+
+/**
+    NAV
+*/
+nav {
+    background-color: #74b9ff;
+}
+
+.page-footer {
+    background-color: #74b9ff;
+}
+
+.main-color {
+    background-color: #0984e3;
+}
+
+.second-color {
+    background-color: #74b9ff;
+}
+
+.third-color {
+    background-color: #2d3436;
+}
