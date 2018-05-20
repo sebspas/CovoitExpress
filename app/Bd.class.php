@@ -195,42 +195,6 @@ class BD {
     } // selectTop()
 
     /**
-     * Function selectMovieIDWithTag()
-     *
-     * Recupere des ids de films ayant le tag passe en parametre
-     * et qui n'apparaissent pas parmis les films que l'user a déjà noté
-     */
-    function selectMovieIDWithTag($tag, $iduser, $orderatt, $quantity) {
-        if (isset($orderatt)) {
-            $query = "SELECT m.id FROM movie m 
-                        WHERE m.id NOT IN 
-                            (SELECT um.movie_id FROM user_movies um WHERE um.user_id = ?)
-                        AND m.id IN 
-                            (SELECT mt2.movie_id FROM movie_tags mt2 WHERE mt2.tag_id = ?)
-                    ORDER BY $orderatt DESC LIMIT $quantity"; 
-        } else {
-            $query = "SELECT m.id FROM movie m 
-                        WHERE m.id NOT IN 
-                            (SELECT um.movie_id FROM user_movies um WHERE um.user_id = ?)
-                        AND m.id IN 
-                            (SELECT mt2.movie_id FROM movie_tags mt2 WHERE mt2.tag_id = ?)
-                    LIMIT $quantity";
-        }
-        return $this->selectImpl($query, array($iduser, $tag));
-    } // selectMovieIDWithTag()
-
-    /**
-     * Function selectMovieWithId()
-     *
-     * Recupere l'id, le nom et l'image d'un film a partir de son id
-     */
-    function selectMovieWithId($id) {
-        $query = "SELECT m.id, m.name, m.image FROM movie m WHERE m.id = ?";
-        return $this->selectImpl($query, array($id));
-    } // selectMovieWithId()
-
-
-    /**
      * Function selectMult()
      *
      * Recupere tout les tuples de la table sur laquel on effectue les operations,les renvoie dans 
@@ -254,62 +218,6 @@ class BD {
         }
         return $this->selectImpl($query, array($cond_val,$cond_val2));
     } // selectTwoParam()
-
-
-    function selectPreferredTags($iduser, $count = 10) {
-        return $this->selectImpl(
-            "SELECT t.id, t.name, ut.rating FROM tag t JOIN user_tags ut ON t.id = ut.tag_id WHERE t.id IN (SELECT ut.tag_id FROM user_tags WHERE ut.user_id = ?) ORDER BY ut.rating DESC LIMIT $count",
-            array($iduser)
-        );
-    }
-
-    function selectMostPopularTag($iduser) {
-        return $this->selectOneImpl(
-            "SELECT t.id, t.name, ut.rating FROM tag t JOIN user_tags ut ON t.id = ut.tag_id WHERE t.id IN (SELECT ut.tag_id FROM user_tags WHERE ut.user_id = ?) ORDER BY ut.tag_count DESC",
-            array($iduser)
-        );
-    }
-
-    function selectEmergingTag($iduser) {
-        return $this->selectOneImpl(
-            "SELECT t.id, t.name, ut.rating FROM tag t JOIN user_tags ut ON t.id = ut.tag_id WHERE t.id IN (SELECT ut.tag_id FROM user_tags WHERE ut.user_id = ?) ORDER BY ut.tag_count ASC",
-            array($iduser)
-        );
-    }
-
-    function selectRandomUnratedTag($iduser) {
-        return $this->selectOneImpl(
-            "SELECT t.id, t.name FROM tag t WHERE t.id NOT IN (SELECT ut.tag_id FROM user_tags ut WHERE ut.user_id = ?) ORDER BY RAND()",
-            array($iduser)
-        );
-    }
-
-    function selectRecentRatedMovies($iduser) {
-        // TODO: order by timestamp instead of rating
-        return $this->selectImpl(
-            "SELECT um.rating, m.name FROM movie m JOIN user_movies um ON m.id = um.movie_id WHERE m.id IN (SELECT um.movie_id FROM user_movies WHERE um.user_id = ?) ORDER BY um.rating DESC",
-            array($iduser)
-        );
-    }
-
-
-    function searchMovies($searchTerms) {
-        $query = "SELECT title, idmovie, img FROM $this->table WHERE %s";
-        $conditions = array();
-
-        for($i =0; $i < sizeof($searchTerms); $i++){
-            array_push($conditions, "title LIKE ?");
-            $searchTerms[$i] = "%".$searchTerms[$i]."%";
-        }
-
-        $query = sprintf($query, join($conditions, " OR "));
-        $req = self::$db->prepare($query);
-        $req->execute($searchTerms);
-        $results = $req->fetchAll(PDO::FETCH_OBJ);
-        $req->closeCursor();
-
-        return $results;
-    }
 
     /**
      * Function addUser()
