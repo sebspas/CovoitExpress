@@ -1,0 +1,54 @@
+{% extends 'template.twig' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col s12 m4 low">
+            <div class="card blue-card darken-1">
+                <div class="card-image">
+                    <img class="avatar center" src="webroot/images/User_Avatar-ninja.png">
+                </div>
+                    <div class="center card-content white-text">Greetings {{ name }}!</div>
+            </div>                
+        </div>
+
+        <div class="col s12 m8 card blue-card darken-1 low">
+            <h4 class="style-white">Trips as driver</h4>
+            <div class="divider"></div>
+            <table>
+                <tbody>
+                {% for movie in movies %}
+                    <tr>
+                        <td>
+                            {% for i in 0..4 %}{% if i < movie.rating  %}<i class="fa fa-star star-full">{% else %}<i class="fa fa-star star-empty">{% endif %}</i>{% endfor %}
+                        </td>
+                        <td>
+                            <a href="index.php?page=movie&id={{ movie.name }}">{{movie.name}}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col s12 m8 card blue-card darken-1 low">
+            <h4 class="style-white">Trips as passenger</h4>
+            <div class="divider"></div>
+            <table>
+                <tbody>
+                {% for movie in movies %}
+                    <tr>
+                        <td>
+                            {% for i in 0..4 %}{% if i < movie.rating  %}<i class="fa fa-star star-full">{% else %}<i class="fa fa-star star-empty">{% endif %}</i>{% endfor %}
+                        </td>
+                        <td>
+                            <a href="index.php?page=movie&id={{ movie.name }}">{{movie.name}}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
