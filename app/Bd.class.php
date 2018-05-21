@@ -204,6 +204,17 @@ class BD {
         return $this->selectImpl("SELECT * FROM $this->table WHERE $cond_att = ?", array($cond_val));
     } // selectMult()
 
+    function selectTravels() {
+        $req = self::$db->prepare("SELECT * FROM $this->table WHERE (starttime >= ? AND idowner != ?)");
+        $date = new DateTime("now", new DateTimeZone('America/New_York'));
+        $req->execute(array($date->getTimestamp(), $_SESSION['idUser']));
+        $donnees = $req->fetchAll(PDO::FETCH_OBJ);
+
+        $req->closeCursor();
+        
+        return $donnees;
+    } // selectTravels()
+
     /**
      * Function selectTwoParam()
      *
@@ -235,6 +246,14 @@ class BD {
         $req->execute(array($Pseudo,$Pass,$Mail,$Phone,$city));
         $req->closeCursor();
     } // addUser()
+
+    function addTravel($startcity, $endcity, $startTime, $endTime, $idcar, $price) {
+        $req = self::$db->prepare("INSERT INTO `travel`
+            (startcity, endcity, starttime, endtime, price, idowner, idvehicle)
+             VALUES (?,?,?,?,?,?,?)");
+        $req->execute(array($startcity, $endcity, $startTime, $endTime, $price, $_SESSION['idUser'], $idcar));
+        $req->closeCursor();
+    } // adTravel()
 
     /**
      * Function update()

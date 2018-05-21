@@ -1,7 +1,9 @@
 <?php
-    // include the model file
     require_once(Config::$path['model'].'addTravel.php');
 
+    $vehicles = getVehicles();
+
+    $errors = array();
     // check if the user posts the createTravel form
     if (isset($_POST['createTravel'])) {
         $idcar = isset($_POST['idcar']) ? $_POST['idcar'] : false;
@@ -24,7 +26,8 @@
         'name' => $_SESSION['pseudo'],
         'connected' => $_SESSION['login'],
         'errors' => $errors,
-        'data' => $_POST
+        'data' => $_POST,
+        'vehicles' => $vehicles
         ));
 
     $_SESSION['previous_page'] = 'home';

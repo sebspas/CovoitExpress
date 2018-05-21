@@ -49,9 +49,9 @@
                                 <div class="input-field col s12">                                  
                                     <select name="idcar">
                                         <option value="" disabled selected>Choose your car</option>
-                                        <option value="1">Option 1</option>
-                                        <option value="2">Option 2</option>
-                                        <option value="3">Option 3</option>
+                                        {% for vehicle in vehicles %}
+                                            <option value="{{ vehicle.idvehicle }}">{{ vehicle.name }}</option>
+                                        {% endfor %}                        
                                     </select>                                
                                     <label>Car Selection</label>
                                 </div>

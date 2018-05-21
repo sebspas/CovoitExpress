@@ -24,26 +24,34 @@
         if (empty($price) || !$price || $price == 0 ) {
             $errors[] = ("The price must not be null or empty.");
         }
+        if (!$idcar) {
+            $errors[] = ("you must select a car.");
+        }
 
         if (!empty($startdate) && !empty($starthour)) {
-            $startTime = DateTime::createFromFormat('m/d/Y G:i', $startdate . " " . $starthour);
+            $startTime = DateTime::createFromFormat('m/d/Y G:i', $startdate . " " . $starthour, new DateTimeZone('America/New_York'));
             $startTime = $startTime->getTimestamp();
         }
        
         if (!empty($enddate) && !empty($endhour)) {
-            $endTime = DateTime::createFromFormat('m/d/Y G:i', $enddate . " " . $endhour);
+            $endTime = DateTime::createFromFormat('m/d/Y G:i', $enddate . " " . $endhour, new DateTimeZone('America/New_York'));
             $endTime = $endTime->getTimestamp();
-
-            if ($startTime <= time() || $startTime >= $endTime) {
+            $date = new DateTime("now", new DateTimeZone('America/New_York'));
+            if ($startTime <= $date->getTimestamp() || $startTime >= $endTime) {
                 $errors[] = ("The date are not valid.");
             }
         }
 
         if(sizeof($errors) == 0){
-            $BD->addTravel($startcity, $endcity, $startdate, $enddate, $starthour, $endhour, $idcar, $price);
+            $BD->addTravel($startcity, $endcity, $startTime, $endTime, $idcar, $price);
         }
 
         return $errors;
+    }
+
+    function getVehicles() {
+        $BD = new BD('vehicle');
+        return $BD->selectAll('name');
     }
 
 ?>
