@@ -62,7 +62,6 @@
 body {
     background-color: #282828;
     background-image: url("../images/bg_login.jpg");
-    font-family: 'PT Serif';
     color: white;
 }
 
@@ -118,6 +117,10 @@ nav {
     background-color: #74b9ff;
 }
 
+/**
+    COLORS
+*/
+
 .main-color {
     background-color: #0984e3;
 }
@@ -128,4 +131,32 @@ nav {
 
 .third-color {
     background-color: #2d3436;
+}
+
+/**
+    DATEPICKER
+*/
+
+.datepicker-date-display {
+    background-color: #0984e3;
+}
+
+.datepicker-day-button {
+    color : black;
+}
+
+.datepicker-table td.is-today button {
+    color : #0984e3;
+}
+
+.datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done {
+    color : #74b9ff;
+}
+
+.datepicker-table td.is-selected {
+    background-color : #74b9ff;
+}
+
+.timepicker-digital-display {
+    background-color : #0984e3;
 }
