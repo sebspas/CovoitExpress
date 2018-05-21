@@ -16,4 +16,26 @@
         }
         return $UserPref;
     }
+
+    function GetDriverTrips($iduser){
+        // get trips where user is the driver
+        $BD = new BD('travel');
+        $trips = $BD->selectMult("idowner",$iduser);
+
+        if (empty($trips)){
+            return NULL;
+        }
+        return $trips;
+    }
+
+    function GetPassengerTrips($iduser){
+        // get trips where user is the driver
+        $BD = new BD('travel');
+        $trips = $BD->selectTravelsAsPassenger("idowner",$iduser);
+
+        if (empty($trips)){
+            return NULL;
+        }
+        return $trips;
+    }
 ?>
