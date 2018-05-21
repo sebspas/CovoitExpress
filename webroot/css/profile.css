@@ -1,3 +1,17 @@
 .blue-card {
     background-color: #74B9FF !important;
 }
+
+.size-img {
+    width: 200px !important;
+    height: 200px !important;
+}
+
+.size-sign {
+    width: 36px !important;
+    height: 36px !important;
+}
+
+.padding-card {
+    padding: 5%;
+}

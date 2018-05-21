@@ -198,7 +198,7 @@ class BD {
      * Function selectMult()
      *
      * Recupere tout les tuples de la table sur laquel on effectue les operations,les renvoie dans 
-     * un tableau ou chaque case et un tuple
+     * un tableau ou chaque case est un tuple
      */
     function selectMult($cond_att, $cond_val) {
         return $this->selectImpl("SELECT * FROM $this->table WHERE $cond_att = ?", array($cond_val));
@@ -348,6 +348,22 @@ class BD {
             return false;
         }
     } // isInDb()
+
+    /**
+     * Function selectPreferencesByUserID()
+     * 
+     * Renvoie les infos de toutes les preferences d'un user 
+     * @param string l'id de l'user 
+     */
+    function selectPreferencesByUserID($iduser) {
+        return $this->selectImpl(
+            "SELECT * FROM preference p JOIN user_preferences up ON p.idpreferences = up.idpreference WHERE p.idpreferences IN 
+            ( SELECT up.idpreference FROM user_preferences WHERE up.iduser = ?
+            ) ORDER BY p.name",
+            array($iduser)
+        );
+    }
+
 } // class bd()
 
 ?>

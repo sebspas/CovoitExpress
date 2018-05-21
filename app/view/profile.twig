@@ -4,11 +4,64 @@
 <div class="container">
     <div class="row">
         <div class="col s12 m4 low">
-            <div class="card blue-card darken-1">
+            <div class="card center padding-card blue-card darken-1">
                 <div class="card-image">
-                    <img class="avatar center" src="webroot/images/User_Avatar-ninja.png">
+                    <img class="size-img avatar center" src="{{ user.img }}">
                 </div>
-                    <div class="center card-content white-text">Greetings {{ name }}!</div>
+                <div class="center card-content white-text">Hello {{ user.pseudo }}! You currently have ${{ user.money }} on your account.</div>
+                
+                <div class="divider"></div>
+                <h4 class="style-white">Your information</h4>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Current City:
+                            </td>
+                            <td>
+                                {{ user.city }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Account Mail:
+                            </td>
+                            <td>
+                                {{ user.mail }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Phone Number:
+                            </td>
+                            <td>
+                                {{ user.phone }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+                <div class="divider"></div>
+                <h4 class="style-white">Your preferences</h4>
+                {% if preferences == NULL  %}
+                <div class="center white-text">You have set no preferences yet.</div>
+                {% else %}
+                <table>
+                    <tbody>
+                    {% for pref in preferences %}
+                        <tr>
+                            <td>
+                                <img class="size-sign center" src="{{ pref.img }}">
+                            </td>
+                            <td>
+                                {{ pref.name }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
             </div>                
         </div>
 

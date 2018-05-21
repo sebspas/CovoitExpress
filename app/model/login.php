@@ -7,7 +7,7 @@
 
             $iduser = $BD->select("pseudo",$_POST['pseudo']);
             $_SESSION['pseudo'] = htmlentities($_POST['pseudo']);
-            $_SESSION['idUser'] = $iduser->id;
+            $_SESSION['idUser'] = $iduser->iduser;
             $_SESSION['login'] = 'ok';
             return true;
         } else {
