@@ -205,11 +205,43 @@ class BD {
     } // selectMult()
 
     function selectTravels() {
-        $req = self::$db->prepare("SELECT *, 
-                (SELECT COUNT(*) FROM passengers p WHERE p.idtravel = t.idtravel) as `passengers` 
+        $req = self::$db->prepare("SELECT *
             FROM travel t WHERE (t.starttime >= ? AND idowner != ?)");
+
         $date = new DateTime("now", new DateTimeZone('America/New_York'));
         $req->execute(array($date->getTimestamp(), $_SESSION['idUser']));
+        $donnees = $req->fetchAll(PDO::FETCH_OBJ);
+
+        $req->closeCursor();
+        
+        return $donnees;
+    } // selectTravels()
+
+    function searchTravels($startcity, $endcity, $startdate, $starthour, $placesLeft, $minPrice) {
+        $reqString = "SELECT * 
+         FROM travel t  WHERE (t.starttime >= ? AND idowner != ?)";
+
+        if (!empty($startcity)) $reqString .= " AND t.startcity = '$startcity'";
+        if (!empty($endcity)) $reqString .= " AND t.endcity = '$endcity'";
+        if (!empty($minPrice) && $placesLeft != 0) $reqString .= " AND t.price <= $minPrice";
+        if (!empty($placesLeft) && $placesLeft != 0) $reqString .= " AND t.places >= $placesLeft";
+
+        if (!empty($startdate)) {
+            if (!empty($starthour)) {
+                $startTime = DateTime::createFromFormat('m/d/Y G:i', $startdate . " " . $starthour, new DateTimeZone('America/New_York'));
+                $startTime = $startTime->getTimestamp();
+            }
+
+            $startTime = DateTime::createFromFormat('m/d/Y G:i', $startdate . " 00:00", new DateTimeZone('America/New_York'));
+            $startTime = $startTime->getTimestamp();
+
+            $reqString .= " AND t.starttime >= $startTime";
+        }
+
+        $req = self::$db->prepare($reqString);
+        $date = new DateTime("now", new DateTimeZone('America/New_York'));
+        $req->execute(array($date->getTimestamp(), $_SESSION['idUser']));
+
         $donnees = $req->fetchAll(PDO::FETCH_OBJ);
 
         $req->closeCursor();
