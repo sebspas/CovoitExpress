@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                             <div class="row">                      
-                                <div class="input-field col s12">                                  
+                                <div class="input-field col s6">                                  
                                     <select name="idcar">
                                         <option value="" disabled selected>Choose your car</option>
                                         {% for vehicle in vehicles %}
@@ -54,6 +54,11 @@
                                         {% endfor %}                        
                                     </select>                                
                                     <label>Car Selection</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">airline_seat_recline_extra</i>
+                                    <input id="places" type="number" class="price" name="places" value="{{ data['places'] }}">
+                                    <label for="places">Places</label>
                                 </div>
                             </div>
                             <div class="row">
