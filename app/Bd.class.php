@@ -412,6 +412,21 @@ class BD {
         );
     }
 
+    /**
+     * Function selectTravelsAsPassenger()
+     * 
+     * Renvoie les infos de tous les trajets où l'user était un passager 
+     * @param string l'id de l'user 
+     */
+    function selectTravelsAsPassenger($iduser) {
+        return $this->selectImpl(
+            "SELECT * FROM travel t JOIN passengers p ON t.idtravel = p.idtravel WHERE t.idtravel IN 
+            ( SELECT p.idtravel FROM passengers WHERE p.iduser = ?
+            ) ORDER BY t.starttime",
+            array($iduser)
+        );
+    }
+
 } // class bd()
 
 ?>

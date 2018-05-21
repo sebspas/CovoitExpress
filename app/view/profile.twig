@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col s12 m4 low">
-            <div class="card center padding-card blue-card darken-1">
+            <div class="card center padding-card dark-card darken-1">
                 <div class="card-image">
                     {% if user.img == "avatar.png"  %}
                     <img class="size-img avatar center" src="webroot/images/{{ user.img }}">
@@ -47,7 +47,7 @@
 
                 <h4 class="style-white">Your preferences</h4>
                 {% if preferences == NULL  %}
-                <div class="center white-text">You have set no preferences yet.</div>
+                <div class="center card-content white-text">You have set no preferences yet.</div>
                 {% else %}
                 <table>
                     <tbody>
@@ -67,42 +67,56 @@
             </div>                
         </div>
 
-        <div class="col s12 m8 card blue-card darken-1 low">
+        <div class="col s12 m8 card grey-card darken-1 low">
             <h4 class="style-white">Trips as driver</h4>
             <div class="divider"></div>
+            {% if drivertrips == NULL  %}
+            <div class="center card-content white-text">You have created no travel yet.</div>
+            {% else %}
             <table>
                 <tbody>
-                {% for movie in movies %}
+                {% for dtrip in drivertrips %}
                     <tr>
                         <td>
-                            {% for i in 0..4 %}{% if i < movie.rating  %}<i class="fa fa-star star-full">{% else %}<i class="fa fa-star star-empty">{% endif %}</i>{% endfor %}
+                            {{ dtrip.startcity }} - {{ dtrip.endcity }}
                         </td>
                         <td>
-                            <a href="index.php?page=movie&id={{ movie.name }}">{{movie.name}}</a>
+                            Depart: {{ dtrip.starttime|date("m/d/Y G:i", "America/New_York") }}
+                        </td>
+                        <td>
+                            Price: ${{ dtrip.price }}
                         </td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
+            {% endif %}
         </div>
 
-        <div class="col s12 m8 card blue-card darken-1 low">
+        <div class="col s12 m8 card grey-card darken-1 low">
             <h4 class="style-white">Trips as passenger</h4>
             <div class="divider"></div>
+            {% if passtrips == NULL  %}
+            <div class="center card-content white-text">You have booked no travel yet.</div>
+            {% else %}
             <table>
                 <tbody>
-                {% for movie in movies %}
+                {% for ptrip in passtrips %}
                     <tr>
                         <td>
-                            {% for i in 0..4 %}{% if i < movie.rating  %}<i class="fa fa-star star-full">{% else %}<i class="fa fa-star star-empty">{% endif %}</i>{% endfor %}
+                            {{ ptrip.startcity }} - {{ ptrip.endcity }}
                         </td>
                         <td>
-                            <a href="index.php?page=movie&id={{ movie.name }}">{{movie.name}}</a>
+                            Depart: {{ ptrip.starttime|date("m/d/Y G:i", "America/New_York") }}
+                        </td>
+                        <td>
+                            Price: ${{ ptrip.price }}
                         </td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
+            {% endif %}
         </div>
     </div>
 </div>
