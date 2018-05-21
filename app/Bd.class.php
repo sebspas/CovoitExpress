@@ -206,10 +206,37 @@ class BD {
 
     function selectTravels() {
         $req = self::$db->prepare("SELECT *, 
-                (SELECT COUNT(*) FROM passengers p WHERE p.idtravel = t.idtravel) as `passengers` 
+                (places - (SELECT COUNT(*) FROM passengers p WHERE p.idtravel = t.idtravel)) as 'placesLeft'
             FROM travel t WHERE (t.starttime >= ? AND idowner != ?)");
         $date = new DateTime("now", new DateTimeZone('America/New_York'));
         $req->execute(array($date->getTimestamp(), $_SESSION['idUser']));
+        $donnees = $req->fetchAll(PDO::FETCH_OBJ);
+
+        $req->closeCursor();
+        
+        return $donnees;
+    } // selectTravels()
+
+    function searchTravels($startcity, $endcity, $startdate, $starthour, $placesLeft, $minPrice) {
+
+        $reqString = "SELECT * 
+         FROM travel t  WHERE (t.starttime >= ? AND idowner != ?)";
+
+        if (!empty($startcity)) $reqString .= " AND t.startcity = '$startcity'";
+        if (!empty($endcity)) $reqString .= " AND t.endcity = '$endcity'";
+       
+        if (!empty($minPrice) && $placesLeft != 0) $reqString .= " AND t.price <= $minPrice";
+
+        $reqString .= " AND t.idtravel IN (SELECT t2.idtravel, (places - (SELECT COUNT(*) FROM passengers p WHERE p.idtravel = t2.idtravel)) as placesLeft
+        FROM travel t2";
+         if (!empty($placesLeft) && $placesLeft != 0) $reqString .= " WHERE placesLeft >= $placesLeft";
+        $reqString .= ")";
+
+        var_dump($reqString);
+        $req = self::$db->prepare($reqString);
+        $date = new DateTime("now", new DateTimeZone('America/New_York'));
+        $req->execute(array($date->getTimestamp(), $_SESSION['idUser']));
+
         $donnees = $req->fetchAll(PDO::FETCH_OBJ);
 
         $req->closeCursor();
