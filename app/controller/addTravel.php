@@ -12,7 +12,8 @@
             $_POST['startdate'], $_POST['enddate'],  
             $_POST['starthour'],  $_POST['endhour'],
             $idcar,
-            $_POST['price']
+            $_POST['price'],
+            $_POST['places']
         );
 
         if (sizeof($errors) == 0) {

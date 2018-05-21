@@ -11,11 +11,13 @@
             <div class="card-content white-text">
               <span class="card-title">{{ travel.startcity }} - {{ travel.endcity }}</span>
               <p>Depart : {{ travel.starttime|date("m/d/Y G:i", "America/New_York") }}</p>
-              <p>Arrival : {{ travel.endtime|date("m/d/Y G:i", "America/New_York") }}</p>
-              <p>$ {{ travel.price }}</p>
+              <p>Arrival : {{ travel.endtime|date("m/d/Y G:i", "America/New_York") }}</p>            
             </div>
             <div class="card-action">
-              <a href="#">See more</a>
+              <div class="row">
+                <p class="card-price col s6">$ {{ travel.price }}</p>
+                 <a class="col s6 btn main-bg-color" href="index.php">See more</a>
+              </div>                        
             </div>
           </div>
         </div>
@@ -23,16 +25,6 @@
       </div>
   </div>
 </main>
-
-<footer class="page-footer modal-trigger" href="#unlike">
-  <div class="container">
-    <div class="row">
-      <div class="center dark-grey col s12 bottom-line">
-        <p><a class="modal-trigger" href="#unlike">Change these suggestions?</a></p>
-      </div>
-    </div>
-  </div>
-</footer>
 
   <!-- Modal Structure -->
   <div id="unlike" class="modal bottom-sheet">

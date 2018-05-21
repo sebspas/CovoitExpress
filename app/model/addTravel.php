@@ -1,6 +1,6 @@
 <?php
-    function TryCreateTravel($startcity, $endcity, $startdate, $enddate, $starthour, $endhour, $idcar, $price) {
-        $BD = new BD('travel');
+    function TryCreateTravel($startcity, $endcity, $startdate, $enddate, $starthour, $endhour, $idcar, $price, $places) {
+        $BD = new BD('vehicle');
         $errors = array();
 
         if (empty($startcity)) {
@@ -24,8 +24,16 @@
         if (empty($price) || !$price || $price == 0 ) {
             $errors[] = ("The price must not be null or empty.");
         }
+        if (empty($places) || !$places || $places == 0 ) {
+            $errors[] = ("The places must not be null or empty.");
+        }
         if (!$idcar) {
             $errors[] = ("you must select a car.");
+        } else {
+            $car = $BD->select("idvehicle", $idcar);
+            if ($car->capacity < $places) {
+                $errors[] = ("The places number must be inferior than the car capacity.");
+            }
         }
 
         if (!empty($startdate) && !empty($starthour)) {
@@ -43,7 +51,7 @@
         }
 
         if(sizeof($errors) == 0){
-            $BD->addTravel($startcity, $endcity, $startTime, $endTime, $idcar, $price);
+            $BD->addTravel($startcity, $endcity, $startTime, $endTime, $idcar, $price, $places);
         }
 
         return $errors;

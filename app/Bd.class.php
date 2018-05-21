@@ -247,11 +247,11 @@ class BD {
         $req->closeCursor();
     } // addUser()
 
-    function addTravel($startcity, $endcity, $startTime, $endTime, $idcar, $price) {
+    function addTravel($startcity, $endcity, $startTime, $endTime, $idcar, $price, $places) {
         $req = self::$db->prepare("INSERT INTO `travel`
-            (startcity, endcity, starttime, endtime, price, idowner, idvehicle)
-             VALUES (?,?,?,?,?,?,?)");
-        $req->execute(array($startcity, $endcity, $startTime, $endTime, $price, $_SESSION['idUser'], $idcar));
+            (startcity, endcity, starttime, endtime, price, idowner, idvehicle, places)
+             VALUES (?,?,?,?,?,?,?,?)");
+        $req->execute(array($startcity, $endcity, $startTime, $endTime, $price, $_SESSION['idUser'], $idcar, $places));
         $req->closeCursor();
     } // adTravel()
 
