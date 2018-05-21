@@ -6,7 +6,11 @@
         <div class="col s12 m4 low">
             <div class="card center padding-card blue-card darken-1">
                 <div class="card-image">
+                    {% if user.img == "avatar.png"  %}
+                    <img class="size-img avatar center" src="webroot/images/{{ user.img }}">
+                    {% else %}
                     <img class="size-img avatar center" src="{{ user.img }}">
+                    {% endif %}
                 </div>
                 <div class="center card-content white-text">Hello {{ user.pseudo }}! You currently have ${{ user.money }} on your account.</div>
                 
