@@ -6,6 +6,10 @@
     background-color: #546E7A !important;
 }
 
+.dark-card {
+    background-color: #2D3436 !important;
+}
+
 .size-img {
     width: 200px !important;
     height: 200px !important;
