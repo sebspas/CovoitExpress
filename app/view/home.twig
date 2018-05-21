@@ -11,7 +11,8 @@
             <div class="card-content white-text">
               <span class="card-title">{{ travel.startcity }} - {{ travel.endcity }}</span>
               <p>Depart : {{ travel.starttime|date("m/d/Y G:i", "America/New_York") }}</p>
-              <p>Arrival : {{ travel.endtime|date("m/d/Y G:i", "America/New_York") }}</p>            
+              <p>Arrival : {{ travel.endtime|date("m/d/Y G:i", "America/New_York") }}</p>
+              <p>Places left : {{ travel.places - travel.passengers }}</p>              
             </div>
             <div class="card-action">
               <div class="row">

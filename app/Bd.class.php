@@ -205,7 +205,9 @@ class BD {
     } // selectMult()
 
     function selectTravels() {
-        $req = self::$db->prepare("SELECT * FROM $this->table WHERE (starttime >= ? AND idowner != ?)");
+        $req = self::$db->prepare("SELECT *, 
+                (SELECT COUNT(*) FROM passengers p WHERE p.idtravel = t.idtravel) as `passengers` 
+            FROM travel t WHERE (t.starttime >= ? AND idowner != ?)");
         $date = new DateTime("now", new DateTimeZone('America/New_York'));
         $req->execute(array($date->getTimestamp(), $_SESSION['idUser']));
         $donnees = $req->fetchAll(PDO::FETCH_OBJ);
