@@ -205,9 +205,9 @@ class BD {
     } // selectMult()
 
     function selectTravels() {
-        $req = self::$db->prepare("SELECT *, 
-                (places - (SELECT COUNT(*) FROM passengers p WHERE p.idtravel = t.idtravel)) as 'placesLeft'
+        $req = self::$db->prepare("SELECT *
             FROM travel t WHERE (t.starttime >= ? AND idowner != ?)");
+
         $date = new DateTime("now", new DateTimeZone('America/New_York'));
         $req->execute(array($date->getTimestamp(), $_SESSION['idUser']));
         $donnees = $req->fetchAll(PDO::FETCH_OBJ);
@@ -218,21 +218,26 @@ class BD {
     } // selectTravels()
 
     function searchTravels($startcity, $endcity, $startdate, $starthour, $placesLeft, $minPrice) {
-
         $reqString = "SELECT * 
          FROM travel t  WHERE (t.starttime >= ? AND idowner != ?)";
 
         if (!empty($startcity)) $reqString .= " AND t.startcity = '$startcity'";
         if (!empty($endcity)) $reqString .= " AND t.endcity = '$endcity'";
-       
         if (!empty($minPrice) && $placesLeft != 0) $reqString .= " AND t.price <= $minPrice";
+        if (!empty($placesLeft) && $placesLeft != 0) $reqString .= " AND t.places >= $placesLeft";
 
-        $reqString .= " AND t.idtravel IN (SELECT t2.idtravel, (places - (SELECT COUNT(*) FROM passengers p WHERE p.idtravel = t2.idtravel)) as placesLeft
-        FROM travel t2";
-         if (!empty($placesLeft) && $placesLeft != 0) $reqString .= " WHERE placesLeft >= $placesLeft";
-        $reqString .= ")";
+        if (!empty($startdate)) {
+            if (!empty($starthour)) {
+                $startTime = DateTime::createFromFormat('m/d/Y G:i', $startdate . " " . $starthour, new DateTimeZone('America/New_York'));
+                $startTime = $startTime->getTimestamp();
+            }
 
-        var_dump($reqString);
+            $startTime = DateTime::createFromFormat('m/d/Y G:i', $startdate . " 00:00", new DateTimeZone('America/New_York'));
+            $startTime = $startTime->getTimestamp();
+
+            $reqString .= " AND t.starttime >= $startTime";
+        }
+
         $req = self::$db->prepare($reqString);
         $date = new DateTime("now", new DateTimeZone('America/New_York'));
         $req->execute(array($date->getTimestamp(), $_SESSION['idUser']));
