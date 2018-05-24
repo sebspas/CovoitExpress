@@ -33,7 +33,7 @@
     function UpdateMoneyUser($iduser,$money) {
         // get user info from pseudo
         $BD = new BD('user');
-        $user = $BD->update("iduser",$iduser,"money",$money);
+        $user = $BD->update("money",$money,"iduser",$iduser);
     }
 
     function AddPassenger($idtravel,$iduser) {
@@ -45,7 +45,7 @@
     function UpdateSeatsAvailable($idtravel,$nbseats) {
         // get user info from pseudo
         $BD = new BD('travel');
-        $BD->update("idtravel",$idtravel,"places",$nbseats);
+        $BD->update("places",$nbseats,"idtravel",$idtravel);
     }
 
     function UpdateMoneyDriver($idtravel) {
@@ -53,9 +53,9 @@
         $BD = new BD('travel');
         $travel = $BD->select("idtravel",$idtravel);
 
-        $BD2 = new BD('user');;
-        $user = $BD2->select("iduser",$travel->idowner);
-        $userFinal = $BD2->update("iduser",$user->iduser,"money",$user->money + $travel->price);
+        $BD->setUsedTable('user');
+        $user = $BD->select("iduser",$travel->idowner);
+        $userFinal = $BD->update("money",$user->money + $travel->price,"iduser",$user->iduser);
     }
     
 ?>

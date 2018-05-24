@@ -22,7 +22,7 @@ class BD {
     public function __construct($table){
         if (self::$db == null) {
             try {
-                self::$db = new PDO(Config::$dbInfoLocal['driver'], Config::$dbInfoLocal['username'], Config::$dbInfoLocal['password']);
+                self::$db = new PDO(Config::$dbInfo['driver'], Config::$dbInfo['username'], Config::$dbInfo['password']);
                 self::$db->exec('SET CHARACTER SET utf8');
                 if(Config::$debug) 
                     self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
