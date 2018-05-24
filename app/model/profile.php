@@ -29,9 +29,9 @@
     }
 
     function GetPassengerTrips($iduser){
-        // get trips where user is the driver
-        $BD = new BD('travel');
-        $trips = $BD->selectTravelsAsPassenger("idowner",$iduser);
+        // get trips where user is a passenger
+        $BD = new BD('passengers');
+        $trips = $BD->selectTravelsAsPassenger($iduser);
 
         if (empty($trips)){
             return NULL;

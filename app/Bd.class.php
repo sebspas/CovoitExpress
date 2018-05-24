@@ -264,6 +264,13 @@ class BD {
         return $this->selectImpl($query, array($cond_val,$cond_val2));
     } // selectTwoParam()
 
+    function selectTwoParamPerso($cond_att,$cond_val,$cond_att2,$cond_val2) {
+
+        $query = "SELECT * FROM $this->table WHERE $cond_att = ? AND $cond_att2 = ?";
+        
+        return $this->selectImpl($query, array($cond_val,$cond_val2));
+    } // selectTwoParam()
+
     /**
      * Function addUser()
      *
@@ -288,6 +295,14 @@ class BD {
         $req->execute(array($startcity, $endcity, $startTime, $endTime, $price, $_SESSION['idUser'], $idcar, $places));
         $req->closeCursor();
     } // adTravel()
+
+    function addPass($idtravel, $iduser) {
+        $req = self::$db->prepare("INSERT INTO `passengers`
+            (idtravel, iduser)
+             VALUES (?,?)");
+        $req->execute(array($idtravel, $iduser));
+        $req->closeCursor();
+    } // addPass()
 
     /**
      * Function update()
@@ -401,6 +416,8 @@ class BD {
             return false;
         }
     } // isInDb()
+
+    
 
     /**
      * Function selectPreferencesByUserID()
