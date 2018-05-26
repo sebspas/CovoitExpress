@@ -143,6 +143,11 @@
                         <td>
                             Price: ${{ dtrip.price }}
                         </td>
+                        <td>
+                            <a class="btn-floating btn-small waves-effect waves-light green" href="index.php?page=travel&idtravel={{dtrip.idtravel}}">
+                                <i class="material-icons">chevron_right</i>
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -168,6 +173,11 @@
                         </td>
                         <td>
                             Price: ${{ ptrip.price }}
+                        </td>
+                        <td>
+                            <a class="btn-floating btn-small waves-effect waves-light green" href="index.php?page=travel&idtravel={{dtrip.idtravel}}">
+                                <i class="material-icons">chevron_right</i>
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}
