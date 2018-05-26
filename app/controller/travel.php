@@ -6,7 +6,8 @@
 
     echo $twig->render('travel.twig', array(
         'connected' => $_SESSION['login'],
-        'travel' => $travel
+        'user' => $_SESSION['idUser'],
+        'travel' => $travel,
         ));
 
     $_SESSION['previous_page'] = 'home';
