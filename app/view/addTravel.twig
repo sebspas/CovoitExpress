@@ -1,90 +1,99 @@
 {% extends 'template.twig' %}
 
 {% block content %}
-<main>
-  <div class="container">
-        <div class="row">
-            <div class="offset-m2 center block col s12 m8">
-                <div class="card third-color">
-                    <div class="card-content white-text">
-                        <span class="card-title">Create a new travel !</span>
-                        <form class="" action="index.php?page=addTravel" method="post">
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <i class="material-icons prefix">location_city</i>
-                                    <input id="city" type="text" class="validate" name="startcity" value="{{ data['startcity'] }}">
-                                    <label for="city">Start City</label>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="offset-m2 center block col s12 m8">
+                    <div class="card third-color">
+                        <div class="card-content white-text">
+                            <span class="card-title">Create a new travel !</span>
+                            <form class="" action="index.php?page=addTravel" method="post">
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <i class="material-icons prefix">location_city</i>
+                                        <input id="city" type="text" class="validate" name="startcity"
+                                               value="{{ data['startcity'] }}">
+                                        <label for="city">Start City</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <i class="material-icons prefix">location_city</i>
+                                        <input id="city" type="text" class="validate" name="endcity"
+                                               value="{{ data['endcity'] }}">
+                                        <label for="city">End City</label>
+                                    </div>
                                 </div>
-                                <div class="input-field col s6">
-                                    <i class="material-icons prefix">location_city</i>
-                                    <input id="city" type="text" class="validate" name="endcity" value="{{ data['endcity'] }}">
-                                    <label for="city">End City</label>
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <i class="material-icons prefix">today</i>
+                                        <input id="starttime" type="text" class="datepicker" name="startdate"
+                                               value="{{ data['startdate'] }}">
+                                        <label for="starttime">Start Time</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <i class="material-icons prefix">alarm</i>
+                                        <input id="starthour" type="text" class="timepicker" name="starthour"
+                                               value="{{ data['starthour'] }}">
+                                        <label for="starthour">Start Hour</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <i class="material-icons prefix">today</i>
-                                    <input id="starttime" type="text" class="datepicker" name="startdate" value="{{ data['startdate'] }}">
-                                    <label for="starttime">Start Time</label>
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <i class="material-icons prefix">today</i>
+                                        <input id="endtime" type="text" class="datepicker" name="enddate"
+                                               value="{{ data['enddate'] }}">
+                                        <label for="endtime">End Time</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <i class="material-icons prefix">alarm</i>
+                                        <input id="endhour" type="text" class="timepicker" name="endhour"
+                                               value="{{ data['endhour'] }}">
+                                        <label for="endhour">End Hour</label>
+                                    </div>
                                 </div>
-                                <div class="input-field col s6">
-                                    <i class="material-icons prefix">alarm</i>
-                                    <input id="starthour" type="text" class="timepicker" name="starthour" value="{{ data['starthour'] }}">
-                                    <label for="starthour">Start Hour</label>
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <select name="idcar">
+                                            <option value="" disabled selected>Choose your car</option>
+                                            {% for vehicle in vehicles %}
+                                                <option value="{{ vehicle.idvehicle }}">{{ vehicle.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <label>Car Selection</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <i class="material-icons prefix">airline_seat_recline_extra</i>
+                                        <input id="places" type="number" class="price" name="places"
+                                               value="{{ data['places'] }}">
+                                        <label for="places">Places</label>
+                                    </div>
                                 </div>
-                            </div>   
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <i class="material-icons prefix">today</i>
-                                    <input id="endtime" type="text" class="datepicker" name="enddate" value="{{ data['enddate'] }}">
-                                    <label for="endtime">End Time</label>
+                                <div class="row">
+                                    <div class="offset-s3 input-field col s6">
+                                        <i class="material-icons prefix">attach_money</i>
+                                        <input id="price" type="number" class="price" name="price"
+                                               value="{{ data['price'] }}">
+                                        <label for="price">Price</label>
+                                    </div>
                                 </div>
-                                <div class="input-field col s6">
-                                    <i class="material-icons prefix">alarm</i>
-                                    <input id="endhour" type="text" class="timepicker" name="endhour" value="{{ data['endhour'] }}">
-                                    <label for="endhour">End Hour</label>
+                                <div class="row">
+                                    <input class="btn btn-default" type="submit" name="createTravel"
+                                           value="Create a travel !">
                                 </div>
-                            </div>
-                            <div class="row">                      
-                                <div class="input-field col s6">                                  
-                                    <select name="idcar">
-                                        <option value="" disabled selected>Choose your car</option>
-                                        {% for vehicle in vehicles %}
-                                            <option value="{{ vehicle.idvehicle }}">{{ vehicle.name }}</option>
-                                        {% endfor %}                        
-                                    </select>                                
-                                    <label>Car Selection</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <i class="material-icons prefix">airline_seat_recline_extra</i>
-                                    <input id="places" type="number" class="price" name="places" value="{{ data['places'] }}">
-                                    <label for="places">Places</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="offset-s3 input-field col s6">
-                                    <i class="material-icons prefix">attach_money</i>
-                                    <input id="price" type="number" class="price" name="price" value="{{ data['price'] }}">
-                                    <label for="price">Price</label>
-                                </div>
-                            </div>                                                           
-                            <div class="row">
-                                <input class="btn btn-default" type="submit" name="createTravel" value="Create a travel !">
-                            </div>
-                        </form>
-                        {% if errors %}
-                            <p class="error">
-                                <strong>Error:</strong>
-                                {% for error in errors %}
-                                    {{ error }}<br/>
-                                {% endfor %}
-                            </p>
-                        {% endif %}
+                            </form>
+                            {% if errors %}
+                                <p class="error">
+                                    <strong>Error:</strong>
+                                    {% for error in errors %}
+                                        {{ error }}<br/>
+                                    {% endfor %}
+                                </p>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</main>
+    </main>
 
 {% endblock %}

@@ -8,6 +8,12 @@ class Config {
         'password' => 'aqwedc7'
     );
 
+    public static $dbInfoLocal = array(
+        'driver' => 'mysql:host=localhost;port=3306;dbname=covoitexpress',
+        'username' => 'root',
+        'password' => ''
+    );
+
     public static $path = array(
         'header' => 'app/layout/header.php',
         'footer' => 'app/layout/footer.php',
