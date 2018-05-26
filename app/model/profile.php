@@ -5,6 +5,13 @@
         $User = $BD->select("pseudo",$pseudo);
         return $User;
     }
+
+    function GetAllPreferences(){
+        // get all preferences from BD order by name
+        $BD = new BD('preference');
+        $Preferences = $BD->selectAll("name");
+        return $Preferences;
+    }
      
     function GetUserPreferences($iduser) {
         // get preferences from user id

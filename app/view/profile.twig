@@ -16,7 +16,7 @@
                 
                 <div class="divider"></div>
                 <h4 class="style-white">Your information</h4>
-                <table>
+                <table class="centered">
                     <tbody>
                         <tr>
                             <td>
@@ -45,11 +45,15 @@
                     </tbody>
                 </table>
 
-                <h4 class="style-white">Your preferences</h4>
+                <h4 class="style-white">
+                    Your preferences
+                    <!-- Modal Trigger -->
+                    <a class="btn-floating btn-medium waves-effect waves-light red modal-trigger" href="#modaladd"><i class="material-icons">edit</i></a>
+                </h4>
                 {% if preferences == NULL  %}
                 <div class="center card-content white-text">You have set no preferences yet.</div>
                 {% else %}
-                <table>
+                <table class="centered">
                     <tbody>
                     {% for pref in preferences %}
                         <tr>
@@ -67,13 +71,66 @@
             </div>                
         </div>
 
+        <!-- Modal Structure -->
+        <div id="modaladd" class="modal blue-card">
+            <div class="modal-content">
+                <h4>Edit your preferences</h4>
+                <div>
+                    <table class="centered">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    ADD A TRAVEL PREFERENCE
+                                </td>
+                                <td>
+                                    <select name="idaddpref">
+                                        <option value="" disabled selected>Choose a preference</option>
+                                        {% for pref in allprefs %}
+                                            <option value="{{ pref.idpreferences }}">{{ pref.name }}</option>
+                                        {% endfor %}                        
+                                    </select>                  
+                                </td>
+                                <td>
+                                    <a class="btn-floating btn-medium waves-effect waves-light green"><i class="material-icons">add</i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    {% if preferences == NULL  %}
+                    <div class="center card-content white-text">You have set no preferences yet.</div>
+                    {% else %}
+                    <table class="centered">
+                        <tbody>
+                        {% for pref in preferences %}
+                            <tr>
+                                <td>
+                                    <img class="size-sign center" src="{{ pref.img }}">
+                                </td>
+                                <td>
+                                    {{ pref.name }}
+                                </td>
+                                <td>
+                                    <a class="btn-floating btn-medium waves-effect waves-light red" value="{{ pref.idpreferences }}"><i class="material-icons">delete</i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat" onclick="M.toast({html: 'Preferences updates!'})">Confirm</a>
+            </div>
+        </div>
+
         <div class="col s12 m8 card grey-card darken-1 low">
             <h4 class="style-white">Trips as driver</h4>
             <div class="divider"></div>
             {% if drivertrips == NULL  %}
             <div class="center card-content white-text">You have created no travel yet.</div>
             {% else %}
-            <table>
+            <table class="centered highlight">
                 <tbody>
                 {% for dtrip in drivertrips %}
                     <tr>
@@ -99,7 +156,7 @@
             {% if passtrips == NULL  %}
             <div class="center card-content white-text">You have booked no travel yet.</div>
             {% else %}
-            <table>
+            <table class="centered highlight">
                 <tbody>
                 {% for ptrip in passtrips %}
                     <tr>

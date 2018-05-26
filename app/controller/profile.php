@@ -6,13 +6,15 @@
      $prefUser = GetUserPreferences($_SESSION['idUser']);
      $driverTrips = GetDriverTrips($_SESSION['idUser']);
      $passengerTrips = GetPassengerTrips($_SESSION['idUser']);
+     $allPrefs = GetAllPreferences();
 
     echo $twig->render('profile.twig', array(
         'connected' => $_SESSION['login'],
         'user' => $dataUser,
         'preferences' => $prefUser,
         'drivertrips' => $driverTrips,
-        'passtrips' => $passengerTrips
+        'passtrips' => $passengerTrips,
+        'allprefs' => $allPrefs,
         ));
 
     $_SESSION['previous_page'] = 'home';

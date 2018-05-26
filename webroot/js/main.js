@@ -7,4 +7,7 @@ $(document).ready(function(){
     });
     $('.sidenav').sidenav();
     $('select').formSelect();
+
+    // init for modal
+    $('.modal').modal();
 });
