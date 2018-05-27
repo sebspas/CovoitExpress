@@ -1,6 +1,10 @@
 /*****
     GENERAL
 *****/
+* {
+    outline: none;
+}
+
 .fixed {
     position: fixed;
 }
@@ -51,18 +55,13 @@
     background-color: #282828;
 }
 
-.style-blue {
-    color: #45B3BF;
-}
-
-.style-fushia {
-    color: #D92579;
+h1 {
+    color: white;
 }
 
 body {
-    background-color: #282828;
-    background-image: url("../images/bg_login.jpg");
-    color: white;
+    background: #282828 url("../images/bg_login.jpg") no-repeat center;
+    background-size: cover;
 }
 
 .container {
@@ -75,6 +74,10 @@ body {
 
 .btn:hover {
     background-color: #0984e3;
+}
+
+input {
+    color: white;
 }
 
 /*****
@@ -142,21 +145,37 @@ nav {
 }
 
 .datepicker-day-button {
-    color : black;
+    color: black;
 }
 
 .datepicker-table td.is-today button {
-    color : #0984e3;
+    color: #0984e3;
 }
 
 .datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done {
-    color : #74b9ff;
+    color: #74b9ff;
 }
 
 .datepicker-table td.is-selected {
-    background-color : #74b9ff;
+    background-color: #74b9ff;
 }
 
 .timepicker-digital-display {
-    background-color : #0984e3;
+    background-color: #0984e3;
+}
+
+/*****
+    SERACH OPTIONS
+*****/
+.collapsible {
+    font-size: 15px;
+}
+
+.collapsible-header {
+    color: black;
+    font-size: 15px;
+}
+
+.collapsible-body .btn a {
+    color: white;
 }

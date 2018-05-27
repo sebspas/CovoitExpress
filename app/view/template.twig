@@ -3,6 +3,9 @@
 <head>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import noSliderUI.css-->
+    <link type="text/css" rel="stylesheet" href="webroot/css/nouislider.css"
+          media="screen,projection"/>
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="webroot/css/materialize.min.css"
           media="screen,projection"/>       
@@ -33,7 +36,6 @@
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li class="{% if page == 'home' %}active{% endif %}"><a href="index.php?page=home"><i class="fa fa-car" aria-hidden="true"></i> Home</a></li>
-                    <li class="{% if page == 'search' %}active{% endif %}"><a href="index.php?page=search"><i class="fa fa-search" aria-hidden="true"></i> Search</a></li>
                     <li class="{% if page == 'addTravel' %}active{% endif %}"><a href="index.php?page=addTravel"><i class="fa fa-plus" aria-hidden="true"></i> Create a travel</a></li>
                     <li class="{% if page == 'profile' %}active{% endif %}"><a href="index.php?page=profile"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
                     <li ><a href="index.php?page=logout"><i class="fa fa-power-off" aria-hidden="true"></i></a></li>
@@ -43,7 +45,6 @@
     </div>
     <ul class="sidenav" id="mobile-demo">
         <li class="{% if page == 'home' %}active{% endif %}"><a href="index.php?page=home"><i class="fa fa-car" aria-hidden="true"></i> Home</a></li>
-        <li class="{% if page == 'search' %}active{% endif %}"><a href="index.php?page=search"><i class="fa fa-search" aria-hidden="true"></i> Search</a></li>
         <li class="{% if page == 'addTravel' %}active{% endif %}"><a href="index.php?page=addTravel"><i class="fa fa-plus" aria-hidden="true"></i> Create a travel</a></li>
         <li class="{% if page == 'profile' %}active{% endif %}"><a href="index.php?page=profile"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
         <li ><a href="index.php?page=logout"><i class="fa fa-power-off" aria-hidden="true"></i>Logout</a></li>
@@ -68,8 +69,12 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Shuffle/5.0.3/shuffle.min.js"></script>
     <script type="text/javascript" src="webroot/js/materialize.min.js"></script>
     <script type="text/javascript" src="webroot/js/profile.js"></script>
+    <script type="text/javascript" src="webroot/js/wNumb.js"></script>
+    <script type="text/javascript" src="webroot/js/nouislider.min.js"></script>
     <script type="text/javascript" src="webroot/js/main.js"></script>
+    <script type="text/javascript" src="webroot/js/search.js"></script>
 </body>
 </html>
