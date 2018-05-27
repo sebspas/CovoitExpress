@@ -139,6 +139,14 @@ class BD {
         return $donnees;
     }
 
+    public function selectOwnerFromTravel($idtravel)
+    {
+        return $this->selectOneImpl(
+            "SELECT * FROM user WHERE iduser IN (SELECT idowner FROM travel WHERE idtravel = ?)",
+            array($idtravel)
+        );
+    }
+
     private function selectOneImpl($query, $values = NULL)
     {
         $req = self::$db->prepare($query);

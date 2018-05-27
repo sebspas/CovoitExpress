@@ -1,3 +1,9 @@
 .collapsible-header {
     color: white;
 }
+
+.card-image {
+    width: 75px;
+    height: auto;
+    margin: auto;
+}
