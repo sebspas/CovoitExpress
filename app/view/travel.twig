@@ -1,75 +1,78 @@
 {% extends 'template.twig' %}
 
 {% block content %}
+    <main class="white-text">
+        <h2 id="home-title" class="center">Travel available from {{ travel.startcity }} to {{ travel.endcity }} !</h2>
+        <div class="container">
+            <div class="row">
+                <div class="center block col s12 m5">
+                    <div class="card third-color">
+                        <div class="card-content white-text">
+                            <span class="card-title">Travel information</span>
+                            <ul class="collapsible">
+                                <li>
+                                    <div class="collapsible-header third-color">
+                                        <i class="material-icons">location_city</i>
+                                        Departure of the travel : {{ travel.startcity }}
+                                        at {{ travel.starttime|date("m/d/Y G:i", "America/New_York") }}
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="collapsible-header third-color">
+                                        <i class="material-icons">location_on</i>
+                                        Arrival of the travel : {{ travel.endcity }}
+                                        at {{ travel.endtime|date("m/d/Y G:i", "America/New_York") }}
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="collapsible-header third-color">
+                                        <i class="material-icons">airline_seat_recline_extra</i>
+                                        Seats available : {{ travel.places }}
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="collapsible-header third-color">
+                                        <i class="material-icons">attach_money</i>
+                                        Price : {{ travel.price }}$
+                                    </div>
+                                </li>
+                            </ul>
 
-<main>
-<h2 id="home-title" class="center">Travel available from {{travel.startcity}} to {{travel.endcity}} !</h2>
-    <div class="container">
-        <div class="row">
-            <div class="center block col s12 m12">
-                <div class="card third-color">
-                    <div class="card-content white-text">
-                        <span class="card-title">Travel map</span>
-                        <iframe width="600"  height="450" frameborder="0" style="border:0"
-                                src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyAkwuXz00hD7kRtteBy5A8kHiyx9BSuTrI&origin={{travel.startcity}}}&destination={{travel.endcity}}" allowfullscreen>
-                        </iframe>
+                            {% if user == travel.idowner %}
+                                <a class="waves-effect waves-light btn-large disabled">Buy a seat</a>
+                            {% else %}
+                                <a class="waves-effect waves-light btn-large modal-trigger" href="#modalEnd">Buy a
+                                    seat</a>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="center block col s12 m7">
+                    <div class="card third-color">
+                        <div class="card-content white-text">
+                            <span class="card-title">Travel map</span>
+                            <iframe width="100%" height="auto" frameborder="0" style="border:0;min-height: 450px;"
+                                    src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyAkwuXz00hD7kRtteBy5A8kHiyx9BSuTrI&origin={{ travel.startcity }}}&destination={{ travel.endcity }}"
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="center block col s12 m12">
-                <div class="card third-color">
-                    <div class="card-content white-text">
-                        <span class="card-title">Travel information</span>
-                        <ul class="collapsible">
-                            <li>
-                                <div class="collapsible-header third-color">
-                                <i class="material-icons">location_city</i>
-                                Departure of the travel : {{travel.startcity}} at {{ travel.starttime|date("m/d/Y G:i", "America/New_York") }}
-                                </div>
-                            </li>
-                            <li>
-                                <div class="collapsible-header third-color">
-                                <i class="material-icons">location_on</i>
-                                Arrival of the travel : {{travel.endcity}} at {{ travel.endtime|date("m/d/Y G:i", "America/New_York") }}
-                                </div>
-                            </li>
-                            <li>
-                                <div class="collapsible-header third-color">
-                                <i class="material-icons">airline_seat_recline_extra</i>
-                                Seats available : {{travel.places}}
-                                </div>
-                            </li>
-                            <li>
-                                <div class="collapsible-header third-color">
-                                <i class="material-icons">attach_money</i>
-                                Price : {{travel.price}}$
-                                </div>
-                            </li>
-                        </ul>
-
-                        {% if user == travel.idowner %}
-                            <a class="waves-effect waves-light btn-large disabled">Buy a seat</a>
-                        {% else %}
-                            <a class="waves-effect waves-light btn-large modal-trigger" href="#modalEnd">Buy a seat</a>
-                        {% endif %}
-
-                    </div>
+            <div id="modalEnd" class="modal third-color">
+                <div class="modal-content third-color">
+                    <h4>Payment Warning !</h4>
+                    <p>Are you sure to buy a seat from {{ travel.startcity }} to {{ travel.endcity }}
+                        for {{ travel.price }}$ ?</p>
+                </div>
+                <div class="modal-footer third-color">
+                    <a href="index.php?page=payment&idtravel={{ travel.idtravel }}"
+                       class="modal-close  waves-effect waves-green btn-flat">Yes</a>
+                    <a href="#!" class="modal-close  waves-effect waves-green btn-flat">No</a>
                 </div>
             </div>
         </div>
-        <div id="modalEnd" class="modal third-color">
-            <div class="modal-content third-color">
-                <h4>Payment Warning !</h4>
-                <p>Are you sure to buy a seat from {{travel.startcity}} to {{travel.endcity}} for {{travel.price}}$ ?</p>
-            </div>
-            <div class="modal-footer third-color">
-                <a href="index.php?page=payment&idtravel={{travel.idtravel}}" class="modal-close  waves-effect waves-green btn-flat">Yes</a>
-                <a href="#!" class="modal-close  waves-effect waves-green btn-flat">No</a>
-            </div>
-        </div>
-    </div>
-</main>
+    </main>
 
 {% endblock %}

@@ -62,6 +62,7 @@ h1 {
 body {
     background: #282828 url("../images/bg_login.jpg") no-repeat center;
     background-size: cover;
+    min-height: 100vh;
 }
 
 .container {

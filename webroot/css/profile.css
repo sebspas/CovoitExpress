@@ -23,3 +23,12 @@
 .padding-card {
     padding: 5%;
 }
+
+#modaladd .modal-content {
+    min-height: 500px;
+}
+
+.dropdown-content {
+    overflow-yw: scroll;
+    max-height: 250px;
+}
