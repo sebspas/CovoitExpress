@@ -137,6 +137,7 @@ $(document).ready(function(){
     var minPlacesLeft = 1;
     var depCity = "";
     var arrivalCity = "";
+    var startDay = "";
 
     $("#departure_city").change(function() {
         depCity = $( this ).val();
@@ -147,6 +148,13 @@ $(document).ready(function(){
 
     $("#arrival_city").change(function() {
         arrivalCity = $( this ).val();
+        shuffleInstance.filter(function (element) {
+            return checkFilter(element);
+        });
+    });
+
+    $("#starttime").change(function() {
+        startDay = new Date($( this ).val()).getTime();
         shuffleInstance.filter(function (element) {
             return checkFilter(element);
         });
@@ -173,7 +181,8 @@ $(document).ready(function(){
             && parseInt(element.getAttribute('data-price')) <= maxPrice
             && parseInt(element.getAttribute('data-places')) >= minPlacesLeft
             && checkCity(element.getAttribute('data-departure-city'), depCity)
-            && checkCity(element.getAttribute('data-arrival-city'), arrivalCity);
+            && checkCity(element.getAttribute('data-arrival-city'), arrivalCity)
+            && parseInt(element.getAttribute('data-date'))*1000 >= startDay;
     }
 
     function checkCity(city_given, city_expected) {
