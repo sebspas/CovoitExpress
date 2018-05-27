@@ -20,6 +20,15 @@ require_once 'vendor/autoload.php';
 $loader = new Twig_Loader_Filesystem(ROOT . APP . 'view/');
 $twig = new Twig_Environment($loader);
 
+//  Messages management (between pages)
+if (isset($_SESSION['messages']) && !empty($_SESSION['messages'])) {
+    $messages = $_SESSION['messages'];
+    $_SESSION['messages'] = array();
+} else {
+    $messages = array();
+}
+$twig->addGlobal("messages", $messages);
+
 // redirection selon la page dans l'url
 if (isset($_SESSION['login'])) {
 	if (!empty($_GET['page']) && is_file(Config::$path['controller'].$_GET['page'].'.php') && $_GET['page'] != 'login') {
@@ -39,5 +48,4 @@ if (isset($_SESSION['login'])) {
 	else
 		require_once Config::$path['controller'] . 'login.php';
 }
-
 ?>

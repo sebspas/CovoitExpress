@@ -52,17 +52,8 @@
                                 <input class="btn btn-default" type="submit" name="register" value="Sign Up">
                             </div>
                         </form>
-                        {% if errors %}
-                            <p class="error">
-                                <strong>Error:</strong>
-                                {% for error in errors %}
-                                    {{ error }}<br/>
-                                {% endfor %}
-                            </p>
-                        {% endif %}
-
                     </div>
-                    <div class="card-action">
+                    <div class="card-action white-text">
                         <p>Already a member?
                             <a href="index.php?page=login">SIGN IN</a>
                         </p>

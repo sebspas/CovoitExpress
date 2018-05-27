@@ -8,13 +8,13 @@
           media="screen,projection"/>
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="webroot/css/materialize.min.css"
-          media="screen,projection"/>       
+          media="screen,projection"/>
     <!--Import style.css-->
     <link type="text/css" rel="stylesheet" href="webroot/css/style.css"
           media="screen,projection"/>
     <!--Import the css of the current page-->
     <link type="text/css" rel="stylesheet" href="webroot/css/{{ page }}.css"
-          media="screen,projection"/> 
+          media="screen,projection"/>
     <!--Font Awesome Icons database-->
     <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
           media="screen,projection"/>
@@ -28,6 +28,10 @@
 </head>
 
 <body>
+    <script type="text/javascript">
+        errors = {{ errors|json_encode|raw }};
+        messages = {{ messages|json_encode|raw }};
+    </script>
     {% if connected == 'ok' %}
     <div class="navbar-fixed">
         <nav>
@@ -55,8 +59,8 @@
       <nav>
             <div class="nav-wrapper">
                 <a id="logo-text" href="index.php?page=home" class="left brand-logo"></a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">               
-                </ul>                
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                </ul>
             </div>
       </nav>
     </div>
@@ -71,10 +75,12 @@
     crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Shuffle/5.0.3/shuffle.min.js"></script>
     <script type="text/javascript" src="webroot/js/materialize.min.js"></script>
+    <script type="text/javascript" src="webroot/js/main.js"></script>
     <script type="text/javascript" src="webroot/js/profile.js"></script>
     <script type="text/javascript" src="webroot/js/wNumb.js"></script>
     <script type="text/javascript" src="webroot/js/nouislider.min.js"></script>
-    <script type="text/javascript" src="webroot/js/main.js"></script>
-    <script type="text/javascript" src="webroot/js/search.js"></script>
+    {% if page == 'home' %}
+        <script type="text/javascript" src="webroot/js/search.js"></script>
+    {% endif %}
 </body>
 </html>

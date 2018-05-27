@@ -55,7 +55,7 @@
 
         $BD->setUsedTable('user');
         $user = $BD->select("iduser",$travel->idowner);
-        $userFinal = $BD->update("money",$user->money + $travel->price,"iduser",$user->iduser);
+        $BD->update("money",$user->money + $travel->price,"iduser",$user->iduser);
     }
     
 ?>

@@ -165,6 +165,10 @@ nav {
     background-color: #0984e3;
 }
 
+.datepicker-calendar-container input {
+    color: black;
+}
+
 /*****
     SERACH OPTIONS
 *****/

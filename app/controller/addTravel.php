@@ -17,6 +17,7 @@
         );
 
         if (sizeof($errors) == 0) {
+            $_SESSION['messages'][] = "New travel created!";
             header('Location: index.php?page=home');
         } else {
             $data = $_POST;
