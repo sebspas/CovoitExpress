@@ -304,6 +304,14 @@ class BD {
         $req->closeCursor();
     } // addPass()
 
+    function addPref($idpref, $iduser) {
+        $req = self::$db->prepare("INSERT INTO `user_preferences`
+            (idpreference, iduser)
+             VALUES (?,?)");
+        $req->execute(array($idpref, $iduser));
+        $req->closeCursor();
+    } // addPref()
+
     /**
      * Function update()
      *
@@ -427,9 +435,8 @@ class BD {
      */
     function selectPreferencesByUserID($iduser) {
         return $this->selectImpl(
-            "SELECT * FROM preference p JOIN user_preferences up ON p.idpreferences = up.idpreference WHERE p.idpreferences IN 
-            ( SELECT up.idpreference FROM user_preferences WHERE up.iduser = ?
-            ) ORDER BY p.name",
+            "SELECT * FROM preference p WHERE p.idpreferences IN 
+            ( SELECT idpreference FROM user_preferences WHERE iduser = ?)",
             array($iduser)
         );
     }

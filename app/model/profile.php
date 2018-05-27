@@ -2,14 +2,14 @@
     function GetUser($pseudo) {
         // get user info from pseudo
         $BD = new BD('user');
-        $User = $BD->select("pseudo",$pseudo);
+        $User = $BD->select('pseudo',$pseudo);
         return $User;
     }
 
     function GetAllPreferences(){
         // get all preferences from BD order by name
         $BD = new BD('preference');
-        $Preferences = $BD->selectAll("name");
+        $Preferences = $BD->selectAll('name');
         return $Preferences;
     }
      
@@ -27,7 +27,7 @@
     function GetDriverTrips($iduser){
         // get trips where user is the driver
         $BD = new BD('travel');
-        $trips = $BD->selectMult("idowner",$iduser);
+        $trips = $BD->selectMult('idowner',$iduser);
 
         if (empty($trips)){
             return NULL;
