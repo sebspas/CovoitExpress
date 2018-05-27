@@ -36,10 +36,10 @@
         $user = $BD->update("money",$money,"iduser",$iduser);
     }
 
-    function AddPassenger($idtravel,$iduser) {
+    function AddPassenger($idtravel,$iduser,$nbseats) {
         // get user info from pseudo
         $BD = new BD('passengers');
-        $user = $BD->addPass($idtravel,$iduser);
+        $BD->addPass($idtravel,$iduser,$nbseats);
     }
 
     function UpdateSeatsAvailable($idtravel,$nbseats) {

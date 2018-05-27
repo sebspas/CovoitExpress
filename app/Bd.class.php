@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class bd()
  *
@@ -7,26 +8,28 @@
  * @subpackage Class
  * @author Team
  */
-class BD {
+class BD
+{
     /** @var PDO Connexion a la base de donner */
     private static $db = null;
     /** @var string Nom de la table a laquelle est connecter la classe bd */
     var $table;
-    
+
     /**
      * Function __construct()
      *
      * Constructeur par défaut de la class bd
      * @param string $table Le nom de la table a laquel se connecter.
      */
-    public function __construct($table){
+    public function __construct($table)
+    {
         if (self::$db == null) {
             try {
                 self::$db = new PDO(Config::$dbInfo['driver'], Config::$dbInfo['username'], Config::$dbInfo['password']);
                 self::$db->exec('SET CHARACTER SET utf8');
-                if(Config::$debug) 
-                    self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-            } catch(Exception $e) {
+                if (Config::$debug)
+                    self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (Exception $e) {
                 exit('Errror to DB connection : ' . $e->getMessage());
             }
         }
@@ -38,7 +41,8 @@ class BD {
      *
      * Permet de connaitre la table sur laquel on travail
      */
-    function getUsedTable() {
+    function getUsedTable()
+    {
         return $this->table;
     } // getusedTable()
 
@@ -48,7 +52,8 @@ class BD {
      * Permet de modifier la table sur laquel on effectue les opérations
      * @param string $table Le nom de la nouvelle table a laquel se connecter
      */
-    function setUsedTable($table) {
+    function setUsedTable($table)
+    {
         $this->table = $table;
     }// setUsedTable()
 
@@ -61,7 +66,8 @@ class BD {
      * @param string $cond_att Le nom de la colonne (ex: NOM)
      * @param mixed $cond_val La valeur de la colonne rechercher (ex: Jean)
      */
-    function select($cond_att,$cond_val) {
+    function select($cond_att, $cond_val)
+    {
 
         $req = self::$db->prepare("SELECT * FROM $this->table WHERE $cond_att = ?");
 
@@ -69,43 +75,46 @@ class BD {
         $donnees = $req->fetch(PDO::FETCH_OBJ);
 
         $req->closeCursor();
-        
+
         return $donnees;
     } // select()
 
-    function selectNumber($orderatt, $start, $number,$order = 'DESC') {
-    	$stop = $number;
+    function selectNumber($orderatt, $start, $number, $order = 'DESC')
+    {
+        $stop = $number;
         $req = self::$db->prepare("SELECT * FROM $this->table ORDER BY $orderatt $order LIMIT $start,$stop");
 
         $req->execute();
         $donnees = $req->fetchAll(PDO::FETCH_OBJ);
 
         $req->closeCursor();
-        
+
         return $donnees;
     } // selectNumber()
 
-    function selectNumberWhere($orderatt, $start, $number, $cond_att, $cond_val, $order = 'DESC') {
-    	$stop = $number;
+    function selectNumberWhere($orderatt, $start, $number, $cond_att, $cond_val, $order = 'DESC')
+    {
+        $stop = $number;
         $req = self::$db->prepare("SELECT * FROM $this->table WHERE $cond_att = ? ORDER BY $orderatt $order LIMIT $start,$stop");
 
         $req->execute(array($cond_val));
         $donnees = $req->fetchAll(PDO::FETCH_OBJ);
 
         $req->closeCursor();
-        
+
         return $donnees;
     } // selectNumberWhere()
 
     /**
      * Function count()
      *
-     * Effectue une simple requete sur la table, 
+     * Effectue une simple requete sur la table,
      * elle renvoie le nbr d'element
      * @param string $cond_att Le nom de la colonne (ex: NOM)
      * @param mixed $cond_val La valeur de la colonne rechercher (ex: Jean)
      */
-    function count($cond_att,$cond_val) {
+    function count($cond_att, $cond_val)
+    {
 
         $req = self::$db->prepare("SELECT COUNT(*) as nb FROM $this->table WHERE $cond_att = ?");
 
@@ -117,7 +126,8 @@ class BD {
         return $donnees->nb;
     } // count()
 
-    function countAll() {
+    function countAll()
+    {
 
         $req = self::$db->prepare("SELECT COUNT(*) as nb FROM $this->table");
 
@@ -164,14 +174,16 @@ class BD {
      * @param string $cond_att Le nom de la colonne (ex: NOM)
      * @param mixed $cond_val La valeur de la colonne rechercher (ex: Jean)
      */
-    function selectAttribut($att_select, $cond_att, $cond_val) {
+    function selectAttribut($att_select, $cond_att, $cond_val)
+    {
         return $this->selectImpl(
             "SELECT ? FROM $this->table WHERE $cond_att = ?",
             array($att_select, $cond_val)
         );
     } // select()
 
-    function selectAllWithInfo($cond_att, $cond_val, $cond_att_t, $cond_val_t, $contenu_link) {
+    function selectAllWithInfo($cond_att, $cond_val, $cond_att_t, $cond_val_t, $contenu_link)
+    {
         return $this->selectImpl(
             "SELECT * FROM $this->table WHERE $cond_att = ? OR $cond_att_t = ? ORDER BY $contenu_link DESC",
             array($cond_val, $cond_val_t)
@@ -181,21 +193,23 @@ class BD {
     /**
      * Function selectAll()
      *
-     * Recupere tous les tuples de la table sur laquel on effectue les operations, les renvoie dans 
+     * Recupere tous les tuples de la table sur laquel on effectue les operations, les renvoie dans
      * un tableau ou chaque case et un tuple
      */
-    function selectAll($orderatt) {
+    function selectAll($orderatt)
+    {
         if (isset($orderatt)) {
-            $query = "SELECT * FROM $this->table ORDER BY $orderatt DESC"; 
+            $query = "SELECT * FROM $this->table ORDER BY $orderatt DESC";
         } else {
             $query = "SELECT * FROM $this->table";
         }
         return $this->selectImpl($query);
     } // selectAll()
 
-    function selectTop($orderatt, $quantity) {
+    function selectTop($orderatt, $quantity)
+    {
         if (isset($orderatt)) {
-            $query = "SELECT * FROM $this->table ORDER BY $orderatt DESC, num_votes DESC, year DESC LIMIT $quantity"; 
+            $query = "SELECT * FROM $this->table ORDER BY $orderatt DESC, num_votes DESC, year DESC LIMIT $quantity";
         } else {
             $query = "SELECT * FROM $this->table";
         }
@@ -205,14 +219,16 @@ class BD {
     /**
      * Function selectMult()
      *
-     * Recupere tout les tuples de la table sur laquel on effectue les operations,les renvoie dans 
+     * Recupere tout les tuples de la table sur laquel on effectue les operations,les renvoie dans
      * un tableau ou chaque case est un tuple
      */
-    function selectMult($cond_att, $cond_val) {
+    function selectMult($cond_att, $cond_val)
+    {
         return $this->selectImpl("SELECT * FROM $this->table WHERE $cond_att = ?", array($cond_val));
     } // selectMult()
 
-    function selectTravels() {
+    function selectTravels()
+    {
         $req = self::$db->prepare("SELECT *
             FROM travel t WHERE (t.starttime >= ? AND idowner != ?)");
 
@@ -221,11 +237,12 @@ class BD {
         $donnees = $req->fetchAll(PDO::FETCH_OBJ);
 
         $req->closeCursor();
-        
+
         return $donnees;
     } // selectTravels()
 
-    function searchTravels($startcity, $endcity, $startdate, $starthour, $placesLeft, $minPrice) {
+    function searchTravels($startcity, $endcity, $startdate, $starthour, $placesLeft, $minPrice)
+    {
         $reqString = "SELECT * 
          FROM travel t  WHERE (t.starttime >= ? AND idowner != ?)";
 
@@ -253,30 +270,32 @@ class BD {
         $donnees = $req->fetchAll(PDO::FETCH_OBJ);
 
         $req->closeCursor();
-        
+
         return $donnees;
     } // selectTravels()
 
     /**
      * Function selectTwoParam()
      *
-     * Recupere tout les tuples de la table sur laquel on effectue les operations,les renvoie dans 
+     * Recupere tout les tuples de la table sur laquel on effectue les operations,les renvoie dans
      * un tableau ou chaque case et un tuple depuis la table trajet correspondant aux parametres
      */
-    function selectTwoParam($cond_att,$cond_val,$cond_att2,$cond_val2,$orderatt) {
+    function selectTwoParam($cond_att, $cond_val, $cond_att2, $cond_val2, $orderatt)
+    {
         if (isset($orderatt)) {
             $query = "SELECT * FROM $this->table WHERE $cond_att = ? AND $cond_att2 = ? ORDER BY $orderatt ASC";
         } else {
             $query = "SELECT * FROM $this->table WHERE $cond_att = ? AND $cond_att2 = ?";
         }
-        return $this->selectImpl($query, array($cond_val,$cond_val2));
+        return $this->selectImpl($query, array($cond_val, $cond_val2));
     } // selectTwoParam()
 
-    function selectTwoParamPerso($cond_att,$cond_val,$cond_att2,$cond_val2) {
+    function selectTwoParamPerso($cond_att, $cond_val, $cond_att2, $cond_val2)
+    {
 
         $query = "SELECT * FROM $this->table WHERE $cond_att = ? AND $cond_att2 = ?";
-        
-        return $this->selectImpl($query, array($cond_val,$cond_val2));
+
+        return $this->selectImpl($query, array($cond_val, $cond_val2));
     } // selectTwoParam()
 
     /**
@@ -287,16 +306,18 @@ class BD {
      * @param string $Mail L'adresse mail de l'utilisateur
      * @param string $Pass Le mot de passe non hasher
      */
-    function addUser($Pseudo,$Pass,$Mail,$Phone,$city) {
+    function addUser($Pseudo, $Pass, $Mail, $Phone, $city)
+    {
         $req = self::$db->prepare("INSERT INTO `user`
             (pseudo, password, mail, phone, city, money)
              VALUES (?,?,?,?,?,50)");
         $Pass = sha1($Pass);
-        $req->execute(array($Pseudo,$Pass,$Mail,$Phone,$city));
+        $req->execute(array($Pseudo, $Pass, $Mail, $Phone, $city));
         $req->closeCursor();
     } // addUser()
 
-    function addTravel($startcity, $endcity, $startTime, $endTime, $idcar, $price, $places) {
+    function addTravel($startcity, $endcity, $startTime, $endTime, $idcar, $price, $places)
+    {
         $req = self::$db->prepare("INSERT INTO `travel`
             (startcity, endcity, starttime, endtime, price, idowner, idvehicle, places)
              VALUES (?,?,?,?,?,?,?,?)");
@@ -304,15 +325,17 @@ class BD {
         $req->closeCursor();
     } // adTravel()
 
-    function addPass($idtravel, $iduser) {
+    function addPass($idtravel, $iduser, $nbplaces)
+    {
         $req = self::$db->prepare("INSERT INTO `passengers`
-            (idtravel, iduser)
-             VALUES (?,?)");
-        $req->execute(array($idtravel, $iduser));
+            (idtravel, iduser,nbplaces)
+             VALUES (?,?,?)");
+        $req->execute(array($idtravel, $iduser, $nbplaces));
         $req->closeCursor();
     } // addPass()
 
-    function addPref($idpref, $iduser) {
+    function addPref($idpref, $iduser)
+    {
         $req = self::$db->prepare("INSERT INTO `user_preferences`
             (idpreference, iduser)
              VALUES (?,?)");
@@ -330,20 +353,22 @@ class BD {
      * @param string $cond_att Le nom de la colonne (ex: "NOM")
      * @param mixed $cond_val La valeur de la colonne rechercher (ex: "Jean")
      */
-    function update($att,$att_val,$cond_att,$cond_val) {
-        
+    function update($att, $att_val, $cond_att, $cond_val)
+    {
+
         $req = self::$db->prepare("UPDATE $this->table SET $att = ? WHERE $cond_att = ?");
 
-        $req->execute(array($att_val,$cond_val));
+        $req->execute(array($att_val, $cond_val));
 
         $req->closeCursor();
     } // update()
 
-    function updateTwoParam($att,$att_val,$cond_att,$cond_val, $cond_att2, $cond_val2) {
-        
+    function updateTwoParam($att, $att_val, $cond_att, $cond_val, $cond_att2, $cond_val2)
+    {
+
         $req = self::$db->prepare("UPDATE $this->table SET $att = ? WHERE $cond_att = ? AND $cond_att2 = ?");
 
-        $req->execute(array($att_val,$cond_val, $cond_val2));
+        $req->execute(array($att_val, $cond_val, $cond_val2));
 
         $req->closeCursor();
     } // update()
@@ -358,8 +383,9 @@ class BD {
      * @param string $cond_att Le nom de la colonne (ex: "NOM")
      * @param mixed $cond_val La valeur de la colonne rechercher (ex: "Jean")
      */
-    function inc($att,$cond_att,$cond_val) {
-        
+    function inc($att, $cond_att, $cond_val)
+    {
+
         $req = self::$db->prepare("UPDATE $this->table SET $att = $att + 1 WHERE $cond_att = ?");
 
         $req->execute(array($cond_val));
@@ -376,8 +402,9 @@ class BD {
      * @param string $cond_att Le nom de la colonne (ex: "NOM")
      * @param mixed $cond_val La valeur de la colonne rechercher (ex: "Jean")
      */
-    function decr($att,$cond_att,$cond_val) {
-        
+    function decr($att, $cond_att, $cond_val)
+    {
+
         $req = self::$db->prepare("UPDATE $this->table SET $att = $att - 1 WHERE $cond_att = ?");
 
         $req->execute(array($cond_val));
@@ -392,8 +419,9 @@ class BD {
      * @param string $cond_att Le nom de la colonne (ex: "NOM")
      * @param mixed $cond_val La valeur de la colonne rechercher (ex: "Jean")
      */
-    function delete($cond_att,$cond_val = null) {
-    
+    function delete($cond_att, $cond_val = null)
+    {
+
         $req = self::$db->prepare("DELETE FROM $this->table WHERE $cond_att = ?");
 
         $req->execute(array($cond_val));
@@ -401,10 +429,11 @@ class BD {
         $req->closeCursor();
     } // delete()
 
-    function deleteTwoParam($cond_att,$cond_val = null,$cond_att2,$cond_val2 = null) {
+    function deleteTwoParam($cond_att, $cond_val = null, $cond_att2, $cond_val2 = null)
+    {
         $req = self::$db->prepare("DELETE FROM $this->table WHERE $cond_att = ? AND $cond_att2 = ?");
 
-        $req->execute(array($cond_val,$cond_val2));
+        $req->execute(array($cond_val, $cond_val2));
 
         $req->closeCursor();
     }
@@ -416,32 +445,29 @@ class BD {
      * @param string $cond_att Le nom de la colonne (ex: "NOM")
      * @param mixed $cond_val La valeur de la colonne rechercher (ex: "Jean")
      */
-    function isInDb($cond_att,$cond_val)
+    function isInDb($cond_att, $cond_val)
     {
         $req = self::$db->prepare("SELECT COUNT(*) as nbr FROM $this->table WHERE $cond_att = ?");
         $req->execute(array($cond_val));
         $donnees = $req->fetch(PDO::FETCH_OBJ);
-        if ($donnees->nbr)
-        {
+        if ($donnees->nbr) {
             $req->closeCursor();
             return true;
-        }
-        else
-        {
+        } else {
             $req->closeCursor();
             return false;
         }
     } // isInDb()
 
-    
 
     /**
      * Function selectPreferencesByUserID()
-     * 
-     * Renvoie les infos de toutes les preferences d'un user 
-     * @param string l'id de l'user 
+     *
+     * Renvoie les infos de toutes les preferences d'un user
+     * @param string l'id de l'user
      */
-    function selectPreferencesByUserID($iduser) {
+    function selectPreferencesByUserID($iduser)
+    {
         return $this->selectImpl(
             "SELECT * FROM preference p WHERE p.idpreferences IN 
             ( SELECT idpreference FROM user_preferences WHERE iduser = ?)",
@@ -451,11 +477,12 @@ class BD {
 
     /**
      * Function selectTravelsAsPassenger()
-     * 
-     * Renvoie les infos de tous les trajets où l'user était un passager 
-     * @param string l'id de l'user 
+     *
+     * Renvoie les infos de tous les trajets où l'user était un passager
+     * @param string l'id de l'user
      */
-    function selectTravelsAsPassenger($iduser) {
+    function selectTravelsAsPassenger($iduser)
+    {
         return $this->selectImpl(
             "SELECT * FROM travel t JOIN passengers p ON t.idtravel = p.idtravel WHERE t.idtravel IN 
             ( SELECT p.idtravel FROM passengers WHERE p.iduser = ?

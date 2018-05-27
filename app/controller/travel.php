@@ -12,13 +12,13 @@ if (empty($travel)) {
 $error = array();
 $owner = GetTravelOwner($_GET['idtravel']);
 
-if (isset($_GET['booked'])) {
+if (isset($_POST['booked'])) {
     $nbSeats = SeatsAvailable($_GET['idtravel']);
     $money = MoneyAvailable($_SESSION['idUser']);
     $price = PriceTravel($_GET['idtravel']);
     $dejaLa = CheckPassengers($_GET['idtravel'], $_SESSION['idUser']);
 
-    if ($nbSeats < $_GET['booked']) {
+    if ($nbSeats < $_POST['places']) {
         $error[] = "There is not enough seats available for this travel.";
     } else if ($money < $price) {
         $error[] = "You do not have enough money to pay for this travel.";
@@ -26,12 +26,13 @@ if (isset($_GET['booked'])) {
         $error[] = "You are already on this travel.";
     } else {
         $newMoney = $money - $price;
-        $newSeats = $nbSeats - 1;
+        $newSeats = $nbSeats - $_POST['places'];
         UpdateMoneyUser($_SESSION['idUser'], $newMoney);
         UpdateMoneyDriver($_GET['idtravel']);
         UpdateSeatsAvailable($_GET['idtravel'], $newSeats);
-        AddPassenger($_GET['idtravel'], $_SESSION['idUser']);
+        AddPassenger($_GET['idtravel'], $_SESSION['idUser'],$_POST['places']);
         $_SESSION['messages'][] = "Seat properly booked.";
+        header("Refresh:0");
     }
 }
 
