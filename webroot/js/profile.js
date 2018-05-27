@@ -1,39 +1,37 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
-    $("#btn-add-pref").click(function() {
+    $("#btn-add-pref").click(function () {
 
         var idpref = $("#id-pref-add").val();
 
-        if (idpref != null){
+        if (idpref != null) {
             $.ajax({
                 type: 'GET',
                 url: './app/model/addUserPref.php',
-                data: { 'idpref' : idpref },
-                
-                success: function(result){
+                data: {'idpref': idpref},
+
+                success: function (result) {
                     refresh_pref();
                 }
             });
         }
-        else{
+        else {
             alert("No preference selected");
         }
     });
 
-    $( "#modal-tab-pref tr" ).on( "click", "a#btn-delete-pref", function(){
+    $(document).on("click", "a#btn-delete-pref", function () {
         delete_pref();
     });
 
     function delete_pref() {
-
         var idpref = $("#btn-delete-pref").data('pref');
-
         $.ajax({
             type: 'GET',
             url: './app/model/deleteUserPref.php',
-            data: { 'idpref' : idpref },
-            
-            success: function(result){
+            data: {'idpref': idpref},
+
+            success: function (result) {
                 refresh_pref();
             }
         });
@@ -43,24 +41,24 @@ $(document).ready(function() {
         $.ajax({
             type: 'GET',
             url: './app/model/getUserPref.php',
-            success: function(result){
+            success: function (result) {
                 var result = $.parseJSON(result);
 
                 $("#tab-pref").html(" ");
                 $("#modal-tab-pref").html(" ");
-                
-                $.each(result, function(i, item) {
+
+                $.each(result, function (i, item) {
                     showPref(item.name, item.img, item.idpreferences);
                 })
             }
-        }); 
+        });
     }
 
     function showPref(prefname, prefimg, prefid) {
         $("#modal-tab-pref").append(
             $("<tr>").append(
                 $("<td>").append(
-                    $("<img>").attr({'class':"size-sign center",'src':prefimg})
+                    $("<img>").attr({'class': "size-sign center", 'src': prefimg})
                 ),
                 $("<td>").html(
                     prefname
@@ -68,14 +66,15 @@ $(document).ready(function() {
                 $("<td>").append(
                     $("<a>").attr(
                         {
-                            'class':"btn-floating btn-medium waves-effect waves-light red",
-                            'value':prefid, 'id':"btn-delete-pref"
+                            'class': "btn-floating btn-medium waves-effect waves-light red",
+                            'value': prefid, 'id': "btn-delete-pref",
+                            'data-pref': prefid
                         }
                     ).append(
                         $("<i>").attr(
-                            {'class':"material-icons"}
+                            {'class': "material-icons"}
                         )
-                        .html("delete")
+                            .html("delete")
                     )
                 )
             )
@@ -84,7 +83,7 @@ $(document).ready(function() {
         $("#tab-pref").append(
             $("<tr>").append(
                 $("<td>").append(
-                    $("<img>").attr({'class':"size-sign center",'src':prefimg})
+                    $("<img>").attr({'class': "size-sign center", 'src': prefimg})
                 ),
                 $("<td>").html(
                     prefname
@@ -92,5 +91,5 @@ $(document).ready(function() {
             )
         );
     }
-    
+
 });
