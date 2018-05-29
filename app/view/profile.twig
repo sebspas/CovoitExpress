@@ -123,7 +123,10 @@
                                     Depart: {{ ptrip.starttime|date("m/d/Y G:i", "America/New_York") }}
                                 </td>
                                 <td>
-                                    Price: ${{ ptrip.price }}
+                                    Seats Booked: {{ ptrip.nbplaces }}
+                                </td>
+                                <td>
+                                    Total Price: ${{ ptrip.price * ptrip.nbplaces }}
                                 </td>
                                 <td>
                                     <a class="btn-floating btn-small waves-effect waves-light green"
