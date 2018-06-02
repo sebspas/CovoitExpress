@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c673cd80-6e65-439f-888b-80008c6d6ab0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Bd.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Bd.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controller/travel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controller/travel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/payment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/payment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/view/payment.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/view/travel.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/travel.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/covoitexpress_v1.0.mwb" beforeDir="false" afterPath="$PROJECT_DIR$/database/covoitexpress_v1.0.mwb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/covoitexpress_v1.0.mwb.bak" beforeDir="false" afterPath="$PROJECT_DIR$/database/covoitexpress_v1.0.mwb.bak" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,8 +19,8 @@
       <file leaf-file-name="travel.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controller/travel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="529">
-              <caret line="32" column="13" lean-forward="true" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+            <state relative-caret-position="736">
+              <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -35,7 +28,7 @@
       <file leaf-file-name="travel.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/view/travel.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
+            <state relative-caret-position="2599">
               <caret line="113" column="41" selection-start-line="113" selection-start-column="41" selection-end-line="113" selection-end-column="41" />
             </state>
           </provider>
@@ -44,17 +37,29 @@
       <file leaf-file-name="addTravel.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/view/addTravel.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1173">
-              <caret line="3" column="10" lean-forward="true" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
+            <state relative-caret-position="69">
+              <caret line="3" column="10" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="profile.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="profile.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/view/profile.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="437">
               <caret line="91" column="37" selection-start-line="91" selection-start-column="37" selection-end-line="91" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="767">
+                <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -72,7 +77,7 @@
         <entry file="file://$PROJECT_DIR$/app/model/travel.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="299">
-              <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+              <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -80,8 +85,8 @@
       <file leaf-file-name="payment.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/model/payment.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="41" column="8" lean-forward="true" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+            <state relative-caret-position="943">
+              <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -94,7 +99,7 @@
       <file leaf-file-name="Bd.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Bd.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
+            <state relative-caret-position="7521">
               <caret line="327" column="13" selection-start-line="327" selection-start-column="13" selection-end-line="327" selection-end-column="13" />
             </state>
           </provider>
@@ -154,6 +159,7 @@
         <option value="$PROJECT_DIR$/app/Bd.class.php" />
         <option value="$PROJECT_DIR$/app/model/payment.php" />
         <option value="$PROJECT_DIR$/app/view/profile.twig" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -191,7 +197,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -248,6 +253,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -283,14 +289,16 @@
       <workItem from="1527359892508" duration="8909000" />
       <workItem from="1527372392333" duration="2342000" />
       <workItem from="1527445490297" duration="9911000" />
+      <workItem from="1527966901439" duration="1770000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22114000" />
+    <option name="totallyTimeSpent" value="23884000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18020834" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -320,13 +328,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/webroot/css/home.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webroot/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
@@ -551,13 +552,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controller/payment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" column="19" lean-forward="true" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controller/payment.php" />
     <entry file="file://$PROJECT_DIR$/app/model/home.php">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -585,14 +580,14 @@
     <entry file="file://$PROJECT_DIR$/app/model/travel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="299">
-          <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/addTravel.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1173">
-          <caret line="3" column="10" lean-forward="true" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
+        <state relative-caret-position="69">
+          <caret line="3" column="10" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -605,29 +600,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/travel.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
+        <state relative-caret-position="2599">
           <caret line="113" column="41" selection-start-line="113" selection-start-column="41" selection-end-line="113" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controller/travel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="32" column="13" lean-forward="true" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+        <state relative-caret-position="736">
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Bd.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
+        <state relative-caret-position="7521">
           <caret line="327" column="13" selection-start-line="327" selection-start-column="13" selection-end-line="327" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/model/payment.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="41" column="8" lean-forward="true" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+        <state relative-caret-position="943">
+          <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -638,6 +633,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
           <caret line="91" column="37" selection-start-line="91" selection-start-column="37" selection-end-line="91" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="767">
+            <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
